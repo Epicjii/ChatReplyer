@@ -3,6 +3,7 @@ package plugin.chatreplyer;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@SuppressWarnings("unused")
 public final class ChatReplyer extends JavaPlugin {
     ReplyCommand command;
 
@@ -10,16 +11,18 @@ public final class ChatReplyer extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        command = new ReplyCommand();
+        var replyCommand = getCommand("reply");
 
-        getServer().getPluginManager().registerEvents(command, this);
-        getCommand("reply").setExecutor(command);
+        if (replyCommand != null) {
+            command = new ReplyCommand(replyCommand);
+            replyCommand.setExecutor(command);
+            getServer().getPluginManager().registerEvents(command, this);
+        }
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
         HandlerList.unregisterAll(command);
-
     }
 }
