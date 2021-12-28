@@ -2,8 +2,15 @@ name: ChatReplyer
 version: '${version}'
 main: plugin.chatreplyer.ChatReplyer
 api-version: 1.18
+
 commands:
   reply:
-    description: reply to message
+    description: Replies to the last whisper received.
     usage: /reply or /r
     aliases: [reply, r]
+    permission: chatreplyer.reply
+
+permissions:
+  chatreplyer.reply:
+    description: Allows for the ability to use the reply command.
+    default: true
