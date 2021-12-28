@@ -6,10 +6,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
+import org.bukkit.command.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
@@ -17,13 +14,14 @@ import org.bukkit.event.server.ServerCommandEvent;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class ReplyCommand implements CommandExecutor, Listener {
+public class ReplyCommand implements CommandExecutor, TabCompleter, Listener {
     private static final HashMap<CommandSender, CommandSender> replierToTargetMap = new HashMap<>();
 
     private static final Set<String> whisperCommands = Collections.unmodifiableSet(
@@ -43,7 +41,6 @@ public class ReplyCommand implements CommandExecutor, Listener {
              @NotNull Command command,
              @NotNull String label,
              @NotNull String[] args) {
-
         String message = String.join(" ", args);
 
         var replyTarget = replierToTargetMap.get(sender);
@@ -146,13 +143,16 @@ public class ReplyCommand implements CommandExecutor, Listener {
         var command = splitCommand[0];
 
         if (commandIsNotValid(sender, command, splitCommand)) {
-            System.out.println("INVALID: " + sender.getName());
             return;
         }
 
         for (var recipient : whisperCommandRecipients(sender, command, splitCommand)) {
-            System.out.println("PUTTING: " + sender.getName());
             replierToTargetMap.put(recipient, sender);
         }
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+        return Collections.emptyList();
     }
 }

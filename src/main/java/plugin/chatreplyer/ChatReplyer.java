@@ -16,6 +16,7 @@ public final class ChatReplyer extends JavaPlugin {
         if (replyCommand != null) {
             command = new ReplyCommand(replyCommand);
             replyCommand.setExecutor(command);
+            replyCommand.setTabCompleter(command);
             getServer().getPluginManager().registerEvents(command, this);
         }
     }
