@@ -10,12 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.map.MinecraftFont;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class ReplyCommand implements CommandExecutor, Listener {
     HashMap<Player, Player> replierToTargetmap = new HashMap<>();
