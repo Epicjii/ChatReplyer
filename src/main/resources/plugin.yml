@@ -1,0 +1,9 @@
+name: ChatReplyer
+version: '${version}'
+main: plugin.chatreplyer.ChatReplyer
+api-version: 1.18
+commands:
+  reply:
+    description: reply to message
+    usage: /reply or /r
+    aliases: [reply, r]
