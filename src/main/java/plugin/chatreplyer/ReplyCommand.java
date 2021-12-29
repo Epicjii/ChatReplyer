@@ -51,6 +51,12 @@ public class ReplyCommand implements CommandExecutor, TabCompleter, Listener {
             );
             return true;
         } else {
+            sender.sendMessage(
+                    Component.text("You reply: " + message)
+                            .decoration(TextDecoration.ITALIC, true)
+                            .color(TextColor.fromHexString("#AAAAAA"))
+            );
+
             replyTarget.sendMessage(
                     Component.text(sender.getName() + " replies: " + message)
                             .decoration(TextDecoration.ITALIC, true)
@@ -114,7 +120,6 @@ public class ReplyCommand implements CommandExecutor, TabCompleter, Listener {
     }
 
     private boolean senderPermittedToUseSelector(@NotNull Permissible sender) {
-        System.out.println(sender.hasPermission(PermissionDefault.OP.toString()));
         return sender.hasPermission(PermissionDefault.OP.toString());
     }
 
