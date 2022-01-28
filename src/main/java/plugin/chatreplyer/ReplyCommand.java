@@ -62,6 +62,7 @@ public class ReplyCommand implements CommandExecutor, TabCompleter, Listener {
                             .decoration(TextDecoration.ITALIC, true)
                             .color(TextColor.fromHexString("#AAAAAA"))
             );
+            replierToTargetMap.put(replyTarget,sender);
         }
 
         return true;
